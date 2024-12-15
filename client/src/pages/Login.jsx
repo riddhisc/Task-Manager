@@ -3,9 +3,10 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import Textbox from "../components/Textbox";
 import Button from "../components/Button";
+import { useSelector } from 'react-redux';
 
 const Login = () => {
-  const user ="";
+  const {user} = useSelector((state)=> state.auth);
   const {
     register, handleSubmit,formState:{ errors },
   } = useForm();
@@ -16,6 +17,7 @@ const Login = () => {
     console.log("submit")
   }
 
+  console.log(user);
   useEffect(() => {
     user && navigate("/dashboard");
   }, [user]);
@@ -75,7 +77,7 @@ const Login = () => {
                   name='password'
                   label='Password'
                   className='w-full rounded-full'
-                  register={register("password", {required: "Passwaord is required!",})}
+                  register={register("password", {required: "Password is required!",})}
 
                   error ={errors.password ? errors.password.message : ""}
                   />
